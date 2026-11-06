@@ -1,3 +1,4 @@
+package exceptions;
 /**
  * Indicates that an employee ID is already present in the system.
  */

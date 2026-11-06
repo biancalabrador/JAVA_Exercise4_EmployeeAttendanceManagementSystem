@@ -2,6 +2,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import exceptions.EmployeeAlreadyExistsException;
+import exceptions.EmployeeNotFoundException;
+import exceptions.InvalidAttendanceException;
+
 /**
  * Runs a series of automated checks to verify attendance-management behavior.
  */

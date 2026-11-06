@@ -1,3 +1,4 @@
+package exceptions;
 /**
  * Indicates that an attendance operation cannot be executed for the current state.
  */

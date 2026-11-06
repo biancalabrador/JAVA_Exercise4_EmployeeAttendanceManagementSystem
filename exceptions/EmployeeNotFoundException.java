@@ -1,3 +1,4 @@
+package exceptions;
 /**
  * Indicates that an employee record could not be found.
  */

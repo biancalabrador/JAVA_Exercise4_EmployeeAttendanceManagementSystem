@@ -2,10 +2,20 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * Runs a series of automated checks to verify attendance-management behavior.
+ */
 public class Main {
+  private static final DateTimeFormatter DATE_TIME_FORMATTER =
+      DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+  /**
+   * Executes the attendance-system test suite.
+   *
+   * @param args command-line arguments (unused)
+   */
   public static void main(String[] args) {
     AttendanceManager attendanceManager = new AttendanceManager();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     Employee riri = new Employee("E001", "Riri Williams", "IT");
     Employee nick = new Employee("E002", "Nick Fury", "HR");
@@ -130,7 +140,8 @@ public class Main {
               && recordsAfterSecondTimeIn.get(0) == firstRecord
               && recordsAfterSecondTimeIn.get(0).getTimeOut().equals(firstRecordTimeOut),
           "The new time-in changed the previous completed record.");
-      System.out.println("A new active record was created; the previous completed record is unchanged.");
+      System.out.println(
+          "A new active record was created; the previous completed record is unchanged.");
     } catch (EmployeeNotFoundException e) {
       throw new AssertionError("Registered employee E001 was not found.", e);
     }
@@ -148,16 +159,28 @@ public class Main {
     for (AttendanceRecord record : completedRecords) {
       System.out.println(
           "Employee ID: " + record.getEmployeeId()
-              + ", Time In: " + record.getTimeIn().format(formatter)
-              + ", Time Out: " + record.getTimeOut().format(formatter));
+              + ", Time In: " + record.getTimeIn().format(DATE_TIME_FORMATTER)
+              + ", Time Out: " + record.getTimeOut().format(DATE_TIME_FORMATTER));
     }
     System.out.println("The active attendance record was excluded.");
   }
 
+  /**
+   * Prints a numbered test section heading.
+   *
+   * @param number the case number
+   * @param description the test description
+   */
   private static void printCase(int number, String description) {
     System.out.println("\nTest " + number + ": " + description);
   }
 
+  /**
+   * Throws an assertion error when a condition is false.
+   *
+   * @param condition the condition to validate
+   * @param message the assertion message
+   */
   private static void require(boolean condition, String message) {
     if (!condition) {
       throw new AssertionError(message);
